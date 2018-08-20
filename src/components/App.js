@@ -2,6 +2,7 @@
 import { NavLink, Route, Switch } from "react-router-dom";
 
 import AboutPage from "./AboutPage";
+import JamDicePage from "./containers/JamDicePage";
 import FuelSavingsPage from "./containers/FuelSavingsPage";
 import HomePage from "./HomePage";
 import NotFoundPage from "./NotFoundPage";
@@ -24,11 +25,14 @@ class App extends React.Component {
           <NavLink to="/fuel-savings" activeStyle={activeStyle}>Demo App</NavLink>
           {' | '}
           <NavLink to="/about" activeStyle={activeStyle}>About</NavLink>
+          {' | '}
+          <NavLink to="/jamdice" activeStyle={activeStyle}>Jam Dice!</NavLink>
         </div>
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/fuel-savings" component={FuelSavingsPage} />
           <Route path="/about" component={AboutPage} />
+          <Route path="/jamdice" component={JamDicePage} />
           <Route component={NotFoundPage} />
         </Switch>
       </div>

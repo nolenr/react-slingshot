@@ -1,31 +1,359 @@
-/* Variables */
+/* OOB */
 $vin-blue: #5bb7db;
 $vin-green: #60b044;
 $vin-red: #ff0000;
 
+//warm
+$maroon-red: #A63A50;
+$dark-purple: #330C2F;
+$purple: #561643;
+$light-purple: #9D6381;
+$banana: #EDFBC1;
+$yellow: rgba(244, 211, 94, 1);
+$orange: rgba(238, 150, 75, 1);
+$maroon: rgba(130, 9, 51, 1);
+
+
+//cool
+$light-blue: #BFD0E0;
+$turquoise: #558B6E;
+$blue: rgba(8, 61, 119, 1);
+
+//earth
+$black-ish: #02111B;
+$white: #F0F7EE;
+$light-brown: #A8763E;
+$brown: #5A352A;
+$white-ish: rgba(235, 235, 211, 1);
+
+//wood grain texture
+$wood-grain: //linear-gradient(90deg, #551c07 50%, transparent 50%),
+linear-gradient(94deg, rgba(91,33,5,.1) 0%,rgba(83,29,4,0.32) 23%,rgba(74,24,3,.41) 47%,rgba(80,27,5,0.44) 70%,rgba(81,27,5,0.59) 74%,rgba(93,33,4,0.2) 83%,rgba(115,43,3,.5) 100%),
+                linear-gradient(90deg, #541c09 50%, transparent 50%),
+                linear-gradient(90deg, #7a2e00 50%, #632401 50%),
+;
+
+//sizing
+$die-height: 13em;
+
 /* Styles */
 body {
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  line-height: 1.4em;
-  color: #4d4d4d;
-  min-width: 230px;
-  max-width: 550px;
+  line-height: 1em;
+  color: $light-blue;
+  min-width: 100px;
+  //max-width: 960px;
   margin: 0 auto;
+  text-align: center;
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
+  font-family: vulf-mono;
   font-smoothing: antialiased;
   font-weight: 300;
+  background-color: $yellow;
+  padding: 1em;
+
+  button:focus {outline:0;}
+
+  button /*.roll-button*/ {
+    cursor: pointer;
+    font-family: vulf-mono;
+    line-height: 1em;
+    border-radius: 5em;
+    padding: .5em;
+    width: 99%;
+    height: 100%;
+    background-color: $maroon-red;
+    box-shadow: inset 1px 1px 1px 1px $dark-purple;
+    border: 1px solid $black-ish;
+
+    &:hover {
+      box-shadow: inset 1px 1px 1px 1px $dark-purple;
+    }
+    
+    h3 { 
+      color: #fff; 
+    } 
+  }
+
+  .button-frame {
+    background-color: $brown;
+    background-size: 40px 160px, 60px 29px, 27px 27px;
+    background-image: $wood-grain;
+    border-radius: 5em;
+    padding: .5em;
+    height: $die-height * 2/3;
+    margin-bottom: 20px;
+    //width: 100%;
+  }
+
+  .card {
+    box-shadow: 1px 1px 2px 1px $light-brown;
+  }
+
+  .play-area {
+    padding: 0 100px;
+  }
+
+  .dice-roll-wrap {
+    display: flex;
+    flex-direction: row;
+    
+    .jam-die {
+      margin: 1em;
+      flex-basis: 15%;
+
+      &:hover & > .square {
+        -webkit-animation: dice_roll 1s ease-in-out; 
+      }
+
+      .square {
+        height: $die-height;
+        width: $die-height;
+        margin: auto;
+        display: flex;
+        flex-direction: row;
+        transition-property: background-color;
+        transition-duration: 1s;
+        border-radius: 1em;
+        border: 2px solid $white-ish;
+        
+        &.groove {
+          background-color: $purple;
+        }
+    
+        &.chords {background-color: $orange; }
+          
+        &.bonus {background-color: $turquoise;}
+    
+        &.rolled {
+          -webkit-animation: dice_roll 1s ease-in-out; 
+        }
+        
+        &:hover {
+          -webkit-animation: dice_roll 1s ease-in-out; 
+        }
+        
+        .message {
+          margin:auto;
+          text-align: center;
+          line-height: 1.5em;
+          color: $white-ish;
+        }
+      }
+    }
+
+    .die-options-card {
+      flex-basis: 15%;
+      margin: 1em;
+      margin-left: 0;
+      height: $die-height;
+      background-color: $white-ish;
+      background-size: 40px 160px, 60px 29px, 27px 27px;
+      border-radius: 1em;
+      border: 2px solid $brown;
+      background-image: $wood-grain;
+        ;
+      }
+
+      .knob {
+        margin: auto;
+        margin-top: 3em;
+        width: ($die-height / 2);
+        height: ($die-height / 2);
+        border-radius: ($die-height / 2);
+        border: 3px solid $white-ish;
+        color: $banana;
+        font-size: 1em;
+        background-color: $black-ish;
+        box-shadow: 1px 1px 2px 2px $black-ish;
+
+        .knob-label {
+          padding-top: .5em;
+          color: $banana;
+        }
+
+        &.locked {
+          border-color: $maroon-red;
+          box-shadow: inset 1px 1px 1px 1px $black-ish; 
+        }
+      }
+    
+
+    .output-card {
+      flex-basis: 70%;
+      position: relative;
+      margin: 1em;
+      margin-left: 0;
+      height: $die-height;
+      border-radius: 1em;
+      border: 2px solid $brown;
+      background-color: $white-ish;
+      background-size: 40px 160px, 60px 29px, 27px 27px;
+        
+      
+      background-image: $wood-grain;
+    
+      }
+
+      div.roll-button {
+        flex-basis: 70%;
+        position: relative;
+        margin: 1em;
+        margin-left: 0;
+        height: $die-height;
+        border-radius: 1em;
+        border: 2px solid $brown;
+        background-color: $white-ish;
+        background-size: 40px 160px, 60px 29px, 27px 27px;
+          
+        
+        background-image: $wood-grain;
+      
+        }
+
+      .output-text-area {
+        //margin: .8em;
+        position: relative;
+        width: 98%;
+        max-width: 900px;
+        margin: .5em auto;
+        height: 11.5em;
+        border-radius: 1em;
+        border: 1px solid $brown;
+        box-shadow: inset 1px 1px 1px 1px $light-brown;
+        background-color: #ebebd3;
+        text-overflow: none;
+
+        p {
+          line-height: 1em;
+          
+          &.chords {
+            font-size: 3em;
+          }
+
+          &.groove {
+            font-size: 2em;
+          }
+
+          &.bonus {
+            font-size: 1.5em;
+          }
+
+          //TODO: add transition animation for text changes
+          -webkit-animation: text_change 1s;
+        }
+      }
+    }
+  
+  @-webkit-keyframes text_change {
+    0% {
+      -webkit-transform: scale(1);
+      color: $dark-purple;
+    }
+    /* Adding a step in the middle */
+    30% {
+      -webkit-transform: scale(.7);
+      color: $white-ish;
+    }
+    70% {
+      -webkit-transform: scale(.7);
+      color: $white-ish;
+    }
+    100% {
+      -webkit-transform: scale(.7);
+      color: $dark-purple;
+    }
+  }
+
+  @-webkit-keyframes dice_roll {
+    0% {
+      -webkit-transform: rotate(0deg) scale(1);
+      border-radius: 1em;
+
+    }
+    /* Adding a step in the middle */
+    30% {
+      webkit-transform: scale(.7);
+      border-radius: 7.5em;
+      .message{color: $maroon-red !important;}
+    }
+    70% {
+      webkit-transform: scale(.7);
+      border-radius: 7.5em;
+      .message{color: $maroon-red !important;}
+    }
+    100% {
+      -webkit-transform: rotate(360deg) scale(1);
+      border-radius: 1em;
+    }
+  }
+  @keyframes color-me-in {
+    /* You could think of as "step 1" */
+    0% {
+      background: orange;
+    }
+    /* You could think of as "step 2" */
+    100% {
+      background: black;
+    }
+  }
+
+  h1 {
+    font-size: 5em;
+    line-height: 1em;
+    font-weight:bolder;
+    color: $brown;
+    text-shadow: 2px 2px 2px $white-ish;
+    //color: $dark-purple;
+  }
+
+  h2 {
+    font-size: 2em;
+    line-height: 1em;
+    font-weight:bolder;
+    color: $vin-blue;
+    //color: $dark-purple;
+  }
+
+  h3 {
+    font-size: 2.5em;
+    line-height: 1em;
+    color: $blue;
+    //color: $dark-purple;
+  }
+
+  p {
+    color: $brown;
+    line-height: 1em;
+  }
+}
+
+@font-face {
+  font-family: vulf-mono;
+  src: url(../fonts/Vulf_Mono-Bold_Italic_web.woff) format('woff')
+
 }
 
 td {
 	padding: 12px;
 }
 
-h2 {
-	color: $vin-blue;
+.savings { 
+  color: $vin-green; 
 }
 
-.savings { color: $vin-green; }
-.loss { color: $vin-red; }
-input.small { width: 46px; }
-td.fuel-savings-label { width: 175px; }
+.loss { 
+  color: $vin-red; 
+}
+
+input.small { 
+  width: 46px; 
+}
+td.fuel-savings-label { 
+  width: 175px; 
+}
+
+
+
+
