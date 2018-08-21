@@ -53,44 +53,6 @@ body {
   background-color: $yellow;
   padding: 1em;
 
-  button:focus {outline:0;}
-
-  button /*.roll-button*/ {
-    cursor: pointer;
-    font-family: vulf-mono;
-    line-height: 1em;
-    border-radius: 5em;
-    padding: .5em;
-    width: 99%;
-    height: 100%;
-    background-color: $maroon-red;
-    box-shadow: inset 1px 1px 1px 1px $dark-purple;
-    border: 1px solid $black-ish;
-
-    &:hover {
-      box-shadow: inset 1px 1px 1px 1px $dark-purple;
-    }
-    
-    h3 { 
-      color: #fff; 
-    } 
-  }
-
-  .button-frame {
-    background-color: $brown;
-    background-size: 40px 160px, 60px 29px, 27px 27px;
-    background-image: $wood-grain;
-    border-radius: 5em;
-    padding: .5em;
-    height: $die-height * 2/3;
-    margin-bottom: 20px;
-    //width: 100%;
-  }
-
-  .card {
-    box-shadow: 1px 1px 2px 1px $light-brown;
-  }
-
   .play-area {
     padding: 0 100px;
   }
@@ -176,6 +138,7 @@ body {
         &.locked {
           border-color: $maroon-red;
           box-shadow: inset 1px 1px 1px 1px $black-ish; 
+          
         }
       }
     
@@ -190,8 +153,6 @@ body {
       border: 2px solid $brown;
       background-color: $white-ish;
       background-size: 40px 160px, 60px 29px, 27px 27px;
-        
-      
       background-image: $wood-grain;
     
       }
@@ -245,6 +206,56 @@ body {
         }
       }
     }
+
+    //Flex wrap for 1/2 width submit / clear buttons
+  .btn-flex-wrap {
+    display:flex;
+  }
+
+  //Wood Grain frame which surrounds each 1/2 width submit/clear button
+  .button-frame {
+    background-color: $brown;
+    background-size: 40px 160px, 60px 29px, 27px 27px;
+    background-image: $wood-grain;
+    border-radius: 4em;
+    padding: .5em;
+    height: $die-height * 2/3;
+    margin: 0 10px 10px 10px;
+    flex-basis: 50%;
+  }
+
+  //Fix for default blue border around clicked button
+  button:focus {outline:0;}
+
+  //1/2 width submit/clear button
+  button /*.roll-button*/ {
+    cursor: pointer;
+    font-family: vulf-mono;
+    line-height: 1em;
+    border-radius: 5em;
+    padding: .5em;
+    width: 99%;
+    height: 100%;
+    background-color: $maroon-red;
+    box-shadow: inset 1px 1px 1px 1px $dark-purple;
+    border: 1px solid $black-ish;
+
+    &:hover {
+      box-shadow: inset 1px 1px 1px 1px $dark-purple;
+    }
+
+    &.roll {
+      background-color: $blue;
+    }
+    
+    h3 { 
+      color: #fff; 
+    } 
+  }
+
+  .card {
+    box-shadow: 1px 1px 2px 1px $light-brown;
+  }
   
   @-webkit-keyframes text_change {
     0% {

@@ -28,7 +28,7 @@
     "open:cover": "npm run test:cover && opn ./coverage/lcov-report/index.html",
     "analyze-bundle": "babel-node ./tools/analyzeBundle.js"
   },
-  "author": "Cory House",
+  "author": "Nolen Ramminger",
   "license": "MIT",
   "dependencies": {
     "bootstrap": "3.3.7",

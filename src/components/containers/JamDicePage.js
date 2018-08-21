@@ -10,46 +10,97 @@ export class JamDicePage extends React.Component {
   constructor(props) {
     super (props);
     this.state = {
-      grooveClasses: [],
-      grooveDescription: '',
+      grooveRolledClass: "",
+      grooveDescription: "",
       grooveIsLocked: false,
-      keyClasses: [],
-      keyDescription: '',
+      keyRolledClass: "",
+      keyDescription: "",
       keyIsLocked: false,
-      bonusClasses: [],
+      bonusRolledClass: "",
       bonusDescription: '',
       bonusIsLocked: false,
     }
-    this.rollAllHandler = this.rollAllDice.bind(this);
+    this.rollAllDice = this.rollAllDice.bind(this);
     this.clearHandler = this.clearHandler.bind(this);
+    this.toggleGrooveLock = this.toggleGrooveLock.bind(this);
+    this.toggleKeyLock = this.toggleKeyLock.bind(this);
+    this.toggleBonusLock = this.toggleBonusLock.bind(this);
   }
 
   clearHandler() {
     console.log("state being cleared");
     this.setState({
-      grooveClasses: [],
-      grooveDescription: null,
-      keyClasses: [],
-      keyDescription: null,
-      bonusClasses: [],
-      bonusDescription: null,
+      grooveRolledClass: "",
+      grooveDescription: "",
+      grooveIsLocked: false,
+      keyRolledClass: "",
+      keyDescription: "",
+      keyIsLocked: false,
+      bonusRolledClass: "",
+      bonusDescription: "",
+      bonusIsLocked: false,
     });
-    console.log(this.state);
   }
 
-  rollAllDice() {
-    console.log(this.state);
-    
-    this.setState({
-      grooveClasses: ['rolled'],
-      grooveDescription: getRandomGroove(),
-      keyClasses: ['rolled'],
-      bonusDescription: getRandomBonus(),
-      bonusClasses: ['rolled'],
-      keyDescription: getChordsList(),
-    });
-    
+  clickHandler() {
+    this.rollAllDice();
   }
+  
+  //Roll all dice. Check to see if each die is locked, if not, get a new description and add trigger animation
+  rollAllDice() {
+    let newState={}
+
+    if(!this.state.grooveIsLocked) {
+      newState.grooveRolledClass = "rolled";
+      newState.grooveDescription = getRandomGroove();
+    }
+    if(!this.state.keyIsLocked) {
+      newState.keyRolledClass = "rolled";
+      newState.keyDescription = getChordsList();
+    }
+    if(!this.state.bonusIsLocked) {
+      newState.bonusRolledClass = "rolled";
+      newState.bonusDescription = getRandomBonus();
+    }
+    this.setState(newState);
+  }
+
+  toggleGrooveLock () {
+    let newState = {
+      grooveRolledClass: "",
+      keyRolledClass: "",
+      bonusRolledClass: "",
+      grooveIsLocked: !this.state.grooveIsLocked,
+    }
+    
+    this.setState(newState);
+  }
+
+  toggleKeyLock () {
+    let newState = {
+      grooveRolledClass: "",
+      keyRolledClass: "",
+      bonusRolledClass: "",
+      keyIsLocked: !this.state.keyIsLocked,
+    }
+    
+    this.setState(newState);
+  }
+
+  toggleBonusLock () {
+    let newState = {
+      grooveRolledClass: "",
+      keyRolledClass: "",
+      bonusRolledClass: "",
+      bonusIsLocked: !this.state.bonusIsLocked,
+    }
+    
+    this.setState(newState);
+  }
+
+
+
+  
 
   render() {
     return (
@@ -59,26 +110,35 @@ export class JamDicePage extends React.Component {
             title="groove"  
             description={this.state.grooveDescription} 
             rollFn={this.rollGroove} 
-            dieClasses={this.state.grooveClasses} />
+            rolledClass={this.state.grooveRolledClass}
+            lockFn = {this.toggleGrooveLock} 
+            isLocked = {this.state.grooveIsLocked} />
 
           <DiceRollArea 
             title="chords" 
             description={this.state.keyDescription} 
             rollFn={this.rollGroove} 
-            dieClasses={this.state.keyClasses} />
+            rolledClass={this.state.keyRolledClass}
+            lockFn = {this.toggleKeyLock}
+            isLocked = {this.state.keyIsLocked} />
+            
 
           <DiceRollArea 
             title="bonus" 
             description={this.state.bonusDescription}
             rollFn={this.rollGroove} 
-            dieClasses={this.state.bonusClasses} />
+            rolledClass={this.state.bonusRolledClass} 
+            lockFn = {this.toggleBonusLock}
+            isLocked = {this.state.bonusIsLocked} />
 
-          <div className="roll-button button-frame">
-            <button onClick={this.rollAllHandler}><h3>Roll the Dice!</h3></button>
-          </div>
+          <div className="btn-flex-wrap">
+            <div className="roll-button button-frame">
+              <button className="roll" onClick={this.rollAllDice}><h3>Roll the Dice!</h3></button>
+            </div>
 
-          <div className="roll-button button-frame">
-            <button className="roll-button" onClick={this.clearHandler}><h3>Clear</h3></button>
+            <div className="roll-button button-frame">
+              <button className="roll-button" onClick={this.clearHandler}><h3>Clear</h3></button>
+            </div>
           </div>
         </div>
       </div>
@@ -180,35 +240,6 @@ const musicData = [
     {KeyName: "Ebm", Root: "Ebm", Second: "Fdim", Third: "Gb", Fourth: "Abm", Fifth: "Bbm", Sixth: "B", Seventh: "Db"},
     {KeyName: "Em", Root: "Em", Second: "F#dim", Third: "G", Fourth: "Am", Fifth: "Bm", Sixth: "C", Seventh: "D"},
     {KeyName: "Fm", Root: "Fm", Second: "Gdim", Third: "Ab",  Fourth: "Bbm", Fifth: "Cm", Sixth: "Db", Seventh: "Eb"},
-
-];
-
-const musicDataOld = [
-  {KeyName: "A. major",        Root: "A. major",      Second: "Bm",       Third: "C# minor",  Fourth: "D major",        Fifth: "E major",            Sixth: "F sharp minor",  Seventh: "G sharp diminished" },
-  {KeyName: "Bb major",   Root: "B flat major", Second: "C minor",       Third: "D minor",        Fourth: "E flat major",   Fifth: "F major",            Sixth: "G minor",        Seventh: "A. diminished" },
-  {KeyName: "B major",        Root: "B major",      Second: "C sharp minor", Third: "D sharp minor",  Fourth: "E major",        Fifth: "F sharp major",      Sixth: "G sharp minor",  Seventh: "A. sharp diminished" },
-  {KeyName: "C major",        Root: "C major",      Second: "D minor",       Third: "E minor",        Fourth: "F major",        Fifth: "G major",            Sixth: "A. minor",        Seventh: "B diminished" },
-  {KeyName: "D flat major",   Root: "D flat major", Second: "E flat minor",  Third: "F minor",        Fourth: "G flat major",   Fifth: "A. flat major",       Sixth: "B flat minor",   Seventh: "C diminished" },
-  {KeyName: "D major",        Root: "D major",      Second: "E minor",       Third: "F sharp minor",  Fourth: "G major",        Fifth: "A. major",            Sixth: "B minor",        Seventh: "C sharp diminished" },
-  {KeyName: "E flat major",   Root: "E flat major", Second: "F minor",       Third: "G minor",        Fourth: "A. flat major",   Fifth: "B flat major",       Sixth: "C minor",        Seventh: "D diminished" },
-  {KeyName: "E major",        Root: "E major",      Second: "F sharp minor", Third: "G sharp minor",  Fourth: "A. major",        Fifth: "B major",            Sixth: "C sharp minor",  Seventh: "D sharp diminished" },
-  {KeyName: "F major",        Root: "F major",      Second: "G minor",       Third: "A. minor",        Fourth: "B flat major",   Fifth: "C major",            Sixth: "D minor",        Seventh: "E diminished" },
-  {KeyName: "G flat major",   Root: "G flat major", Second: "A. flat minor",  Third: "B flat minor",   Fourth: "B major",        Fifth: "D flat major",       Sixth: "E flat minor",   Seventh: "F diminished" },
-  {KeyName: "G major",        Root: "G major",      Second: "A. minor",       Third: "B minor",        Fourth: "C major",        Fifth: "D major",            Sixth: "E minor",        Seventh: "F sharp diminished" },
-  {KeyName: "A. flat major",   Root: "A. flat major", Second: "B flat minor",  Third: "C minor",        Fourth: "D flat major",   Fifth: "E flat major",       Sixth: "F minor",        Seventh: "G diminished" },
-  
-  {KeyName: "F sharp minor",  Root: "F sharp minor",Second: "G sharp diminished", Third: "A. major",       Fourth: "B minor",        Fifth: "C sharp minor",      Sixth: "D major",        Seventh: "E major"},
-  {KeyName: "G minor",        Root: "G minor",      Second: "A. diminished",       Third: "B flat major",  Fourth: "C minor",        Fifth: "D minor",            Sixth: "E flat major",   Seventh: "F major"},
-  {KeyName: "G sharp minor",  Root: "G sharp minor",Second: "A. sharp diminished", Third: "B major",       Fourth: "C sharp minor",  Fifth: "D sharp minor",      Sixth: "E major",        Seventh: "F sharp major"},
-  {KeyName: "A. minor",        Root: "A. minor",      Second: "B diminished",       Third: "C major",       Fourth: "D minor",        Fifth: "E minor",            Sixth: "F major",        Seventh: "G major"},
-  {KeyName: "B flat minor",   Root: "B flat minor", Second: "C diminished",       Third: "D flat major",  Fourth: "E flat minor",   Fifth: "F minor",            Sixth: "G flat major",   Seventh: "A. flat major"},
-  {KeyName: "B minor",        Root: "B minor",      Second: "C sharp diminished", Third: "D major",       Fourth: "E minor",        Fifth: "F sharp minor",      Sixth: "G major",        Seventh: "A. major"},
-  {KeyName: "C minor",        Root: "C minor",      Second: "D diminished",       Third: "E flat major",  Fourth: "F minor",        Fifth: "G minor",            Sixth: "A. flat major",   Seventh: "B flat major"},
-  {KeyName: "C sharp minor",  Root: "C sharp minor",Second: "D sharp diminished", Third: "E major",       Fourth: "F sharp minor",  Fifth: "G sharp minor",      Sixth: "A. major",        Seventh: "B major"},
-  {KeyName: "D minor",        Root: "D minor",      Second: "E diminished",       Third: "F major",       Fourth: "G minor",        Fifth: "A. minor",            Sixth: "B flat major",   Seventh: "C major"},
-  {KeyName: "E flat minor",   Root: "E flat minor", Second: "F diminished",       Third: "G flat major",  Fourth: "A. flat minor",   Fifth: "B flat minor",       Sixth: "B major",        Seventh: "D flat major"},
-  {KeyName: "E minor",        Root: "E minor",      Second: "F sharp diminished", Third: "G major",       Fourth: "A. minor",        Fifth: "B minor",            Sixth: "C major",        Seventh: "D major"},
-  {KeyName: "F minor",        Root: "F minor",      Second: "G diminished",       Third: "A. flat major",  Fourth: "B flat minor",   Fifth: "C minor",            Sixth: "D flat major",   Seventh: "E flat major"},
 
 ];
 
