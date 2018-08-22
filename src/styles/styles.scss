@@ -92,10 +92,6 @@ body {
           -webkit-animation: dice_roll 1s ease-in-out; 
         }
         
-        &:hover {
-          -webkit-animation: dice_roll 1s ease-in-out; 
-        }
-        
         .message {
           margin:auto;
           text-align: center;
@@ -176,10 +172,11 @@ body {
       .output-text-area {
         //margin: .8em;
         position: relative;
-        width: 98%;
+        width: 96%;
         max-width: 900px;
         margin: .5em auto;
-        height: 11.5em;
+        padding: .4em;
+        height: 11em;
         border-radius: 1em;
         border: 1px solid $brown;
         box-shadow: inset 1px 1px 1px 1px $light-brown;

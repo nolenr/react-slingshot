@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const DiceRollArea = ({title, description, rollFn, rolledClass, isLocked, lockFn}) => (  
+
   <div className="wrapper">
     <div className="dice-roll-wrap">
       <div className="jam-die">
-        {/*<JamDie message={title} dieClasses={dieClasses} clickFn={rollFn} />*/}
-        <div id="message" className={ `square card ${title} ${rolledClass}` }  onClick={rollFn}><h2 className="message">{title}</h2></div>
+        <div id={title} className={ `square card ${title} ${rolledClass}` }  onClick={rollFn}><h2 className="message">{title}</h2></div>
       </div>
       
       <div className="card die-options-card">

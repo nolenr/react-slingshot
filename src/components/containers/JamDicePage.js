@@ -98,10 +98,6 @@ export class JamDicePage extends React.Component {
     this.setState(newState);
   }
 
-
-
-  
-
   render() {
     return (
       <div>
@@ -149,6 +145,8 @@ export class JamDicePage extends React.Component {
 JamDicePage.propTypes = {
 
 };
+
+//Logic for dice rolls to generate random grooves, chord progressions, and bonus challenges
 
 function getRandomGroove() {
   return grooveTypes[Math.floor(Math.random()*grooveTypes.length)];
@@ -208,11 +206,10 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(JamDicePage);
+export default JamDicePage;
 
+
+/* The data below should ultimately be accessed by REST service. V1 of Jam Dice uses static data, but future versions will enable users to build their own scales, repertoires, wishlists, etc.  */
 //const music data
 const musicData = [
     {KeyName: "A", Root: "A", Second: "Bm", Third: "C#m", Fourth: "D", Fifth: "E", Sixth: "F#m",  Seventh: "G#dim" },
