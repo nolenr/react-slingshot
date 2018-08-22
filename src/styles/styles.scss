@@ -256,21 +256,10 @@ body {
   
   @-webkit-keyframes text_change {
     0% {
-      -webkit-transform: scale(1);
-      color: $dark-purple;
-    }
-    /* Adding a step in the middle */
-    30% {
       -webkit-transform: scale(.7);
-      color: $white-ish;
-    }
-    70% {
-      -webkit-transform: scale(.7);
-      color: $white-ish;
     }
     100% {
-      -webkit-transform: scale(.7);
-      color: $dark-purple;
+      -webkit-transform: scale(1);
     }
   }
 
