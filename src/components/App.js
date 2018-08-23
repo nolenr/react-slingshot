@@ -19,12 +19,15 @@ class App extends React.Component {
     return (
       <div>
         <div>
-          <NavLink exact to="/" activeStyle={activeStyle}>About</NavLink>
+          <NavLink exact to="/" activeStyle={activeStyle}>Home</NavLink>
+          {' | '}
+          <NavLink to="/about" activeStyle={activeStyle}>About</NavLink>
           {' | '}
           <NavLink to="/jamdice" activeStyle={activeStyle}>Jam Dice!</NavLink>
         </div>
         <Switch>
-          <Route path="/" component={AboutPage} />
+          <Route exact path="/" component={HomePage} />
+          <Route path="/about" component={AboutPage} />
           <Route path="/jamdice" component={JamDicePage} />
           <Route component={NotFoundPage} />
         </Switch>
