@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const DiceRollArea = ({title, description, rollFn, rolledClass, isLocked, lockFn}) => (  
+
+
+const DiceRollArea = ({title, description, rollFn, rolledClass, isLocked, lockFn, clearRolledClass}) => (  
 
   <div className="wrapper">
     <div className="dice-roll-wrap">
       <div className="jam-die">
-        <div id={title} className={ `square card ${title} ${rolledClass}` }  onClick={rollFn}><h2 className="message">{title}</h2></div>
+        <div id={title} className={ `square card ${title} ${rolledClass}` }  onClick={rollFn} onAnimationEnd={clearRolledClass}><h2 className="message">{title}</h2></div>
       </div>
       
       <div className="card die-options-card">
@@ -35,7 +37,8 @@ DiceRollArea.propTypes = {
   title: string.isRequired,
   rollFn: PropTypes.any,
   description: PropTypes.any,
-  dieClasses: PropTypes.any
+  dieClasses: PropTypes.any,
+  clearRolledClasses: PropTypes.any
  };
 
 export default DiceRollArea;

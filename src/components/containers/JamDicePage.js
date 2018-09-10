@@ -24,6 +24,7 @@ export class JamDicePage extends React.Component {
     this.toggleGrooveLock = this.toggleGrooveLock.bind(this);
     this.toggleKeyLock = this.toggleKeyLock.bind(this);
     this.toggleBonusLock = this.toggleBonusLock.bind(this);
+    this.clearRolledClasses = this.clearRolledClasses.bind(this);
   }
 
   clearHandler() {
@@ -38,6 +39,14 @@ export class JamDicePage extends React.Component {
       bonusRolledClass: "",
       bonusDescription: "",
       bonusIsLocked: false,
+    });
+  }
+
+  clearRolledClasses() {
+    this.setState({
+      grooveRolledClass: "",
+      keyRolledClass: "",
+      bonusRolledClass: "",
     });
   }
 
@@ -66,9 +75,6 @@ export class JamDicePage extends React.Component {
 
   toggleGrooveLock () {
     let newState = {
-      grooveRolledClass: "",
-      keyRolledClass: "",
-      bonusRolledClass: "",
       grooveIsLocked: !this.state.grooveIsLocked,
     }
     
@@ -77,9 +83,6 @@ export class JamDicePage extends React.Component {
 
   toggleKeyLock () {
     let newState = {
-      grooveRolledClass: "",
-      keyRolledClass: "",
-      bonusRolledClass: "",
       keyIsLocked: !this.state.keyIsLocked,
     }
     
@@ -88,9 +91,6 @@ export class JamDicePage extends React.Component {
 
   toggleBonusLock () {
     let newState = {
-      grooveRolledClass: "",
-      keyRolledClass: "",
-      bonusRolledClass: "",
       bonusIsLocked: !this.state.bonusIsLocked,
     }
     
@@ -107,7 +107,8 @@ export class JamDicePage extends React.Component {
             rollFn={this.rollGroove} 
             rolledClass={this.state.grooveRolledClass}
             lockFn = {this.toggleGrooveLock} 
-            isLocked = {this.state.grooveIsLocked} />
+            isLocked = {this.state.grooveIsLocked} 
+            clearRolledClass= { this.clearRolledClasses }/>
 
           <DiceRollArea 
             title="chords" 
@@ -115,7 +116,8 @@ export class JamDicePage extends React.Component {
             rollFn={this.rollGroove} 
             rolledClass={this.state.keyRolledClass}
             lockFn = {this.toggleKeyLock}
-            isLocked = {this.state.keyIsLocked} />
+            isLocked = {this.state.keyIsLocked} 
+            clearRolledClass= { this.clearRolledClasses } />
             
 
           <DiceRollArea 
@@ -124,7 +126,8 @@ export class JamDicePage extends React.Component {
             rollFn={this.rollGroove} 
             rolledClass={this.state.bonusRolledClass} 
             lockFn = {this.toggleBonusLock}
-            isLocked = {this.state.bonusIsLocked} />
+            isLocked = {this.state.bonusIsLocked} 
+            clearRolledClass= { this.clearRolledClasses } />
 
           <div className="btn-flex-wrap">
             <div className="roll-button button-frame">
